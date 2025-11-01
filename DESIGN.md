@@ -76,14 +76,16 @@ Optional improvements for production:
 <pre style="white-space: pre-wrap;">
 sales-platform-auth/
 ├─ src/
+│  ├─ configs/
 │  ├─ controllers/
 │  ├─ middlewares/
 │  ├─ models/
 │  ├─ routes/
 │  ├─ validations/
 │  ├─ utils/
+│  ├─ app.js
 │  └─ server.js
-├─ .env
+├─ .gitignore
 ├─ Dockerfile
 ├─ docker-compose.yml
 ├─ README.md
