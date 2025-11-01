@@ -22,23 +22,29 @@ A Node.js authentication service with email/password login and social login (Goo
 ```bash
 git clone <your-repo-url>
 cd sales-platform-auth
-
+```
 2. Install dependencies:
 ```bash
 npm install
+```
 
 3. Create a .env file in the root:
+```bash
 PORT=5000
 MONGO_URL=<your-mongodb-uri>
 GOOGLE_CLIENT_ID=<your-google-client-id>
 GOOGLE_CLIENT_SECRET=<your-google-client-secret>
 JWT_ACCESS_SECRET=<your-access-token-secret>
 JWT_REFRESH_SECRET=<your-refresh-token-secret>
+```
 
-4 Run the server:
+4. Run the server:
+```bash
 npm run start
+```
 
-API Endpoints
+5. API Endpoints
+```bash
 | Method | Endpoint              | Description                          |
 | ------ | --------------------- | ------------------------------------ |
 | POST   | /auth/register        | Register new user                    |
@@ -48,5 +54,6 @@ API Endpoints
 | POST   | /auth/refresh         | Refresh access token                 |
 | POST   | /auth/logout          | Logout and invalidate refresh token  |
 | GET    | /auth/me              | Get current user info (requires JWT) |
+```
 
 
