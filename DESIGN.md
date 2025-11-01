@@ -73,7 +73,7 @@ Optional improvements for production:
 ## **9️⃣ Folder Structure**
 
 ---
-
+<pre style="white-space: pre-wrap;">
 sales-platform-auth/
 ├─ src/
 │  ├─ controllers/
@@ -90,3 +90,4 @@ sales-platform-auth/
 ├─ DESIGN.md      
 ├─ package.json
 └─ package-lock.json
+   </pre>
