@@ -57,7 +57,7 @@ export const login = async (req, res, info) => {
     }
 };
 
-export const googleCallback = (req, res) => {
+export const googleCallback = async (req, res) => {
     const accessToken = generateAccessToken(req.user);
     const refreshToken = generateRefreshToken(req.user);
     res.json({ accessToken, refreshToken, user: req.user });

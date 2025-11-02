@@ -8,15 +8,17 @@ import authRoutes from "./routes/auth.js";
 const app = express();
 import passportConfig from './configs/passport.js';
 (async () => {
-  await passportConfig(); // move top-level await inside async IIFE
+  await passportConfig(); 
 })();
 
-
-app.use(cors({
-  origin: "http://localhost:5000", // only this frontend can call API
-  methods: ["GET", "POST"],
-  credentials: true
-}));
+app.set('trust proxy', 1);
+app.use(cors(
+//   {
+//   origin: "*", 
+//   methods: ["GET", "POST"],
+//   credentials: true
+// }
+));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 

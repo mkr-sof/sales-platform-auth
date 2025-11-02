@@ -20,7 +20,11 @@ router.post('/login', validateBody(loginSchema),
 );
 
 router.get('/google', 
-    passport.authenticate('google', {scope: ["profile", "email"]})
+    passport.authenticate('google', {
+      scope: ["profile", "email"],
+      accessType: 'offline',
+      prompt: 'consent'
+    })
 );
 
 router.get('/google/callback',
