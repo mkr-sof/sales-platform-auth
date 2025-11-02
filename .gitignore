@@ -37,6 +37,9 @@ docker-compose.override.yml
 # Test coverage
 coverage/
 
+# Always include Makefile
+!Makefile
+
 # Optional temp files
 *.swp
 *.swo
