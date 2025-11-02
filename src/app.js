@@ -6,7 +6,10 @@ import passport from "passport";
 import bodyParser from "body-parser";
 import authRoutes from "./routes/auth.js";
 const app = express();
-await import("./configs/passport.js");
+import passportConfig from './configs/passport.js';
+(async () => {
+  await passportConfig(); // move top-level await inside async IIFE
+})();
 
 
 app.use(cors({

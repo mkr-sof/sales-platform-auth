@@ -11,8 +11,12 @@ const router = express.Router();
 router.post('/register', validateBody(registerSchema), register);
 
 router.post('/login', validateBody(loginSchema), 
-    passport.authenticate('local', {session: false}),
-    login
+    (req, res, next) => {
+    passport.authenticate("local", { session: false }, async (err, user, info) => {
+      if (err) return next(err);
+      await login(req, res, info);
+    })(req, res, next);
+  }
 );
 
 router.get('/google', 

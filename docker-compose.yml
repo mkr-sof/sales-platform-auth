@@ -1,19 +1,53 @@
 version: '3.9'
+networks:
+  auth-net:
+    driver: bridge
 services:
   app:
+    networks:
+      - auth-net
     build: .
+    restart: always
+    container_name: sales-platform-auth
+    env_file:
+      - .env  
     ports:
       - "4000:4000"
     environment:
-      - MONGO_URI=mongodb://mongo:27017/authdb
-      - JWT_SECRET=supersecret
-      - JWT_REFRESH_SECRET=refreshsecret
+      - MONGO_URL=${MONGO_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - PORT=${PORT}
     depends_on:
-      - mongo
+      - mongo 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   mongo:
     image: mongo:7
+    networks:
+      - auth-net
+    container_name: auth
     restart: always
     ports:
       - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  test:
+    build: .
+    env_file:
+      - .env
+    networks:
+      - auth-net
+    depends_on:
+      - mongo
+    command: npm test
+
+volumes:
+  mongo_data:

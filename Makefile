@@ -6,6 +6,9 @@ run:
 	
 stop:
 	docker compose down
-	
+
 test:
 	docker compose run --rm app npm test
+
+clean:
+	docker compose down -v

@@ -4,6 +4,9 @@ import {Strategy as GoogleStrategy}  from "passport-google-oauth20";
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
+
+export default async function passportConfig() {
+
 passport.use(new LocalStrategy(
     {
         usernameField: "email",
@@ -15,7 +18,7 @@ passport.use(new LocalStrategy(
             if (!user) return done(null, false, {message: "User not found"});
 
             const isValid = await bcrypt.compare(password, user.passwordHash);
-            if (!isValid) return done(null, false, {message: "Invalid password"});
+            if (!isValid) return done(null, false, {message: "Invalid credentials"});
             
             return done(null, user);
         } catch (err) {
@@ -47,3 +50,5 @@ passport.use(new GoogleStrategy(
         }
     }
     ));
+
+}

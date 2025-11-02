@@ -24,19 +24,19 @@ export const register = async (req, res) => {
     }
 };
 
-export const login = async (req, res) => {
+export const login = async (req, res, info) => {
     try {
         const { email, password } = sanitizeBody(req.body);
 
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: "User not found" });
+            return res.status(400).json({ message: info?.message || "User not found" });
         }
 
         const isValid = await bcrypt.compare(password, user.passwordHash);
         if (!isValid) {
-            return res.status(401).json({ message: "Invalid credentials" });
+            return res.status(401).json({ message: info?.message || "Invalid credentials" });
         }
 
         const accessToken = generateAccessToken(user);

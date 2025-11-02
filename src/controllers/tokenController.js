@@ -2,8 +2,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import {generateAccessToken, generateRefreshToken} from "../utils/token.js";
 
-const {verify} = jwt;
-
 export const refreshToken = async (req, res) => {
     const {token} = req.body;
     if (!token) return res.status(401).json({message: "Refresh token missing"});
@@ -18,7 +16,7 @@ export const refreshToken = async (req, res) => {
         const newAccessToken = generateAccessToken(user);
         const newRefreshToken = generateRefreshToken(user);
 
-        user.refreshtokens = user.refreshTokens.filter(t => t !== token);
+        user.refreshTokens = user.refreshTokens.filter(t => t !== token);
         user.refreshTokens.push(newRefreshToken);
         await user.save();
 
